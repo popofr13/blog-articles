@@ -1,0 +1,3 @@
+name: infra
+runtime: nodejs
+description: Example project to deploy PHP on Lambda
