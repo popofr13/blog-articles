@@ -1,5 +1,5 @@
 # Read the documentation at https://www.serverless.com/framework/docs/providers/aws/guide/serverless.yml/
-service: pulumi-php-bref-1
+service: pulumi-php-bref-2
 
 provider:
     name: aws
@@ -44,6 +44,17 @@ functions:
         layers:
             - ${bref:layer.php-82} # PHP
             - ${bref:layer.console} # The "console" layer
+
+    cron1:
+        handler: bin/console
+        layers:
+            - ${bref:layer.php-82}
+            - ${bref:layer.console}
+        events:
+            - schedule:
+                  enabled: true
+                  rate: cron(*/15 * * * ? *)
+                  input: '"app:cron1 arg1 --option1=foo"'
 
 package:
     patterns:
